@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль | ExploreYourDoors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">ExploreYourDoors</h1>
+            <nav class="nav">
+                <button id="homeBtn" class="nav-btn" onclick="window.location.href='index.html'">На главную</button>
+                <button id="cartBtn" class="nav-btn" style="display: none;" onclick="openCart()">Корзина</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Контейнер профиля -->
+    <div class="profile-container">
+        <div class="profile-card">
+            <!-- Шапка профиля -->
+            <div class="profile-header">
+                <h2 class="profile-title">Профиль пользователя</h2>
+                <button id="logoutBtn" class="logout-btn">Выйти</button>
+            </div>
+            
+            <!-- Содержимое профиля -->
+            <div class="profile-content">
+                <!-- Секция аватара и основной информации -->
+                <div class="profile-section">
+                    <div class="avatar-section">
+                        <div class="avatar-container">
+                            <img id="avatarImg" src="/images/default-avatar.jpg" alt="Аватар пользователя" class="avatar-image">
+                        </div>
+                        <div class="avatar-upload">
+                            <span class="file-upload-label">Загрузить новый аватар:</span>
+                            <input type="file" id="avatarInput" accept="image/jpeg,image/png,image/gif" class="file-input">
+                            <small class="info-label">Поддерживаемые форматы: JPG, PNG, GIF</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Секция информации о пользователе -->
+                <div class="profile-section">
+                    <h3 class="section-title">Информация профиля</h3>
+                    <div class="profile-info">
+                        <div class="info-item">
+                            <span class="info-label">Имя пользователя</span>
+                            <span id="username" class="info-value">Загрузка...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Роль</span>
+                            <span id="role" class="info-value">Загрузка...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email</span>
+                            <span id="userEmail" class="info-value">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Секция редактирования профиля -->
+                <div class="profile-section">
+                    <h3 class="section-title">Редактирование профиля</h3>
+                    <div class="edit-section">
+                        <div class="form-row">
+                            <label for="newEmailInput" class="info-label">Новый email</label>
+                            <input type="email" id="newEmailInput" class="form-input" placeholder="Введите новый email">
+                        </div>
+                        <button onclick="saveChanges()" class="save-btn">Сохранить изменения</button>
+                    </div>
+                </div>
+                
+                <!-- Для администраторов (показывается только с ролью admin) -->
+                <div id="adminSection" class="profile-section" style="display: none;">
+                    <h3 class="section-title">Панель администратора</h3>
+                    <div class="edit-section">
+                        <button onclick="window.location.href='admin.html'" class="save-btn">Перейти в админ-панель</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/profile.js"></script>
+    <script>
+        // Показ панели администратора для пользователей с ролью admin
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('jwt');
+            if (token) {
+                try {
+                    const payload = JSON.parse(atob(token.split('.')[1]));
+                    if (payload.role === 'admin') {
+                        document.getElementById('adminSection').style.display = 'block';
+                    }
+                } catch (e) {
+                    console.error('Error parsing token:', e);
+                }
+            }
+        });
+        
+        // Функция для кнопки корзины
+        function openCart() {
+            // Временное оповещение о разработке
+            const message = "Страница корзины находится в разработке и будет доступна в ближайшее время.";
+            alert(message);
+        }
+    </script>
+</body>
+</html>

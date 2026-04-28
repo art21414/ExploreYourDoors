@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploreYourDoors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">ExploreYourDoors</h1>
+            <nav class="nav">
+                <button id="loginBtn" class="nav-btn">Вход</button>
+                <button id="registerBtn" class="nav-btn">Регистрация</button>
+                <button id="cartBtn" class="nav-btn" style="display: none;" onclick="openCart()">Корзина</button>
+                <button id="profileBtn" class="nav-btn" style="display: none;" onclick="window.location.href='profile.html'">Профиль</button>
+                
+                
+            </nav>
+        </div>
+    </header>
+
+    <!-- Поиск -->
+    <div class="search-container">
+        <input type="text" id="keyword" placeholder="Найти дверь..." class="search-input">
+    </div>
+
+    <!-- Карточки товаров -->
+    <div class="product-grid" id="results"></div>
+
+    <script src="js/search.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/reviews.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', updateUI);
+        
+        function openCart() {
+            // Временное оповещение о разработке
+            const message = "Страница корзины находится в разработке и будет доступна в ближайшее время.";
+            alert(message);
+        }
+    </script>
+    
+    
+            
+    
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .admin-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #edf2f7;
+        }
+        
+        .admin-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .admin-subtitle {
+            font-size: 1.1rem;
+            color: #718096;
+            margin: 0;
+        }
+        
+        .admin-content {
+            padding: 1rem 0;
+        }
+        
+        .admin-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        
+        .admin-card {
+            padding: 1.5rem;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .admin-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        
+        .admin-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .admin-btn:hover {
+            background: #1d4ed8;
+        }
+        
+        .development-badge {
+            display: inline-block;
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <!-- Общая шапка -->
+        <div class="header-content">
+            <h1 class="logo">ExploreYourDoors</h1>
+            <nav class="nav">
+                <button id="profileBtn" class="nav-btn" onclick="window.location.href='profile.html'">Профиль</button>
+                <button id="logoutBtn" class="nav-btn">Выход</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-container">
+        <div class="admin-header">
+            <h1 class="admin-title">Административная панель <span class="development-badge">В разработке</span></h1>
+            <p class="admin-subtitle">Управление магазином и настройка уязвимостей системы</p>
+        </div>
+        
+        <div class="admin-content" id="adminContent">
+            <!-- Загрузка контента для администратора через JavaScript -->
+        </div>
+        
+        <div class="admin-section">
+            <h2 class="section-title">Быстрый доступ</h2>
+            <div class="admin-card">
+                <p>Доступные функции панели администратора:</p>
+                <div class="admin-buttons">
+                    <button class="admin-btn" onclick="alert('Функция в разработке')">Управление товарами</button>
+                    <button class="admin-btn" onclick="alert('Функция в разработке')">Управление пользователями</button>
+                    <button class="admin-btn" onclick="alert('Функция в разработке')">Настройка уязвимостей</button>
+                    <button class="admin-btn" onclick="alert('Функция в разработке')">Просмотр логов</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('jwt');
+            
+            if (!token) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                console.log('Role:', payload.role); 
+                
+                if (payload.role !== 'admin') {
+                    window.location.href = '/index.html';
+                } else {
+                    // Загружаем контент для администратора
+                    document.getElementById('adminContent').innerHTML = `
+                        <div class="admin-card">
+                            <p>Добро пожаловать, <strong>${payload.username}</strong>!</p>
+                            <p>Эта панель находится в стадии активной разработки. Новые функции будут добавлены в ближайшее время.</p>
+                        </div>
+                    `;
+                }
+            } catch (e) {
+                console.error('Ошибка токена:', e);
+                localStorage.removeItem('jwt');
+                window.location.href = '/login.html';
+            }
+        });
+    </script>
+</body>
+</html>

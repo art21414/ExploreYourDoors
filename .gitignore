@@ -1,0 +1,7 @@
+node_modules/
+*.log
+*.env.*
+*.pem
+*.key
+backend/xss-catcher/node_modules/
+

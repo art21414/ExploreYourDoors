@@ -1,0 +1,56 @@
+{
+    "sqli": {
+        "enabled": true,
+        "types": {
+            "search": true,
+            "auth": true
+        }
+    },
+    "xss": {
+        "enabled": true,
+        "description": "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+        "types": {
+            "reviews": true
+        }
+    },
+    "dos": {
+        "enabled": false,
+        "description": "CWE-20: Improper Input Validation leading to Denial of Service",
+        "types": {
+            "search": true
+        },
+        "maxInputSize": 100,
+        "globalLimitMB": "1mb",
+        "rateLimit": {
+            "enabled": true,
+            "maxRequests": 100,
+            "windowMs": 60000
+        }
+    },
+    "jwt": {
+        "secret": "your_secret_key"
+    },
+    "code_injection": {
+        "enabled": true,
+        "description": "CWE-94: Improper Control of Generation of Code ('Code Injection')",
+        "details": "Позволяет выполнить PHP-код, встроенный в конец файла изображения через функцию include()",
+        "include_uploaded_files": true,
+        "allow_command_execution": true
+    },
+    "fileUpload": {
+        "enabled": true,
+        "description": "CWE-434: Unrestricted Upload of File with Dangerous Type",
+        "allowedExtensions": ["jpg", "jpeg", "png", "gif"],
+        "validateContent": false,
+        "validateFileType": false,
+        "maxSizeKB": 5000
+    },
+    "imageProcessor": {
+        "enabled": true,
+        "description": "CWE-94: Небезопасная обработка загруженных файлов с выполнением PHP-кода",
+        "validateExtension": false,
+        "validateMimeType": false,
+        "validateImageContent": false,
+        "useInclude": true
+    }
+}
