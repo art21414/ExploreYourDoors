@@ -1,7 +1,7 @@
 # ExploreYourDoors
 
 Intentionally vulnerable web application — online store with toggleable security vulnerabilities.
-Built for security training: SQL Injection, XSS, Code Injection, DoS, Unrestricted File Upload.
+built for security training: SQL Injection, XSS, Code Injection, DoS, Unrestricted File Upload.
 
 Each vulnerability can be enabled/disabled via config without changing code.
 
