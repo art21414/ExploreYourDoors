@@ -1,6 +1,6 @@
 node_modules/
 *.log
-*.env.*
+.env
 *.pem
 *.key
 backend/xss-catcher/node_modules/
