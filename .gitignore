@@ -4,4 +4,4 @@ node_modules/
 *.pem
 *.key
 backend/xss-catcher/node_modules/
-
+frontend/public/uploads/
